@@ -1,9 +1,6 @@
 # ChIP_nf
 Nextflow pipeline for ChIP-seq data analysis
 
-
-# ChIP-seq pipeline
-
 # General
 Ref to ENCODE specification
 
