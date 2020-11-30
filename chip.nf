@@ -313,8 +313,8 @@ process '3A_multiqc' {
     input:
     // only use fastqc from trimmed reads
     file ('pre_fastqc/*') from ch_fastqc_results_for_multiqc.collect().ifEmpty([])
-    file ('bamfiles/*') from ch_bamqc_for_multiqc.collect().ifEmpty([])
-    file ('bamfiles/*') from ch_insert_multiqc.collect().ifEmpty([])
+    file ('flag_idx_dup_align/*') from ch_bamqc_for_multiqc.collect().ifEmpty([])
+    file ('insert/*') from ch_insert_multiqc.collect().ifEmpty([])
 
     output:
     file "*multiqc_report.html"
