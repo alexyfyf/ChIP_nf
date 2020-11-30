@@ -20,7 +20,7 @@ params.species    = "mm10"
 params.samplesheet= "$baseDir/data/samplesheet.csv"
 params.trim       = "trim"
 params.fasta      = ""
-params.blacklist  = "mm10.blacklist.bed"
+params.blacklist  = "$baseDir/data/mm10.blacklist.bed"
 
 log.info """\
 R R B S -  N F    v 1.0
@@ -40,7 +40,7 @@ blacklist       : $params.blacklist
 
 Channel
         .fromPath( params.fasta )
-        .into{ fasta_ch; fasta_index_ch; ch_bam_filter }
+        .into{ ch_fasta; ch_fasta_index; ch_bam_filter }
 
 samplesheet     = file(params.samplesheet)
 species         = Channel.from(params.species)
@@ -75,7 +75,7 @@ process '0A_get_software_versions' {
 Channel
         .fromFilePairs( params.reads, size: params.single_end ? 1 : 2 )
         .ifEmpty { exit 1, "Cannot find any reads matching: ${params.reads}\nNB: Path needs to be enclosed in quotes!\nIf this is single-end data, please specify --single_end on the command line." }
-        .into { raw_reads_fastqc_ch; raw_reads_align_ch }
+        .into { ch_raw_reads_fastqc; ch_raw_reads_align }
 
 
 /**********
@@ -92,7 +92,7 @@ process '1A_pre_fastqc' {
                 }
 
     input:
-    set val(name), file(reads) from raw_reads_fastqc_ch
+    set val(name), file(reads) from ch_raw_reads_fastqc
 
     output:
     file '*_fastqc.{zip,html}' into ch_fastqc_results_for_multiqc
@@ -207,7 +207,7 @@ process '2A_index_genome' {
   label 'bismark'
 
   input:
-      file fasta from fasta_ch
+      file fasta from ch_fasta
   output:
       file 'bwa_index' into ch_bwa_index
 
@@ -217,8 +217,6 @@ process '2A_index_genome' {
   """
 }
 
-
-//raw_reads_align_ch.view()
 lastPath = params.fasta.lastIndexOf(File.separator)
 bwa_base = params.fasta.substring(lastPath+1)
 
@@ -233,7 +231,7 @@ process '2B_mapping' {
 
   input:
       //file index from ch_bwa_index
-      set val(name), file(reads), file(index) from raw_reads_align_ch.combine(ch_bwa_index)
+      set val(name), file(reads), file(index) from ch_raw_reads_align.combine(ch_bwa_index)
       
   output:
       set val(name), file('*.bam'), file('*.bai') into ch_bwa_bam
@@ -261,7 +259,7 @@ process '2B_filter_bam' {
       set val(name), file(bam), file(bai), file(fasta) from ch_bwa_bam.combine(ch_bam_filter)
 
   output:
-      set val(name), file('*final.bam'), file('*final.bam.bai') into ddup_bam_ch
+      set val(name), file('*final.bam'), file('*final.bam.bai') into ch_ddup_bam
       set val(name), file("${name}.flagstat"), file("${name}.idxstats"), file("${name}_dups.txt"), file("${name}_alignmetrics.txt"), file("${name}.final.flagstat") into ch_bamqc_for_multiqc
       file('*.pdf') optional true 
       set val(name), file("${name}_insert.txt") optional true into ch_insert_multiqc
@@ -337,10 +335,10 @@ process '4A_faidx' {
     label 'big'
 
     input:
-    file fasta from fasta_index_ch
+    file fasta from ch_fasta_index
 
     output:
-    file "chrom.sizes" into chr_size_ch
+    file "chrom.sizes" into ch_chromesize
 
     script:
     if( fasta.extension ==~ /fa|fasta/ ) {
@@ -357,9 +355,6 @@ process '4A_faidx' {
        }
 }
 
-// chr_size_ch.view()
-// bedgraph_bismark_ch.view()
-// bedgraph_bismark_ch.combine(chr_size_ch).view()
 
 /**********
  * Process 4B: Generate bigwig files
@@ -370,7 +365,7 @@ process '4B_BAMtoBigWig' {
     publishDir "${params.outdir}/bigwig", mode: 'copy'
 
     input:
-    set val(name), file(bam), file(bai) from ddup_bam_ch
+    set val(name), file(bam), file(bai) from ch_ddup_bam
 
     output:
     file "*.bw"
@@ -385,8 +380,6 @@ process '4B_BAMtoBigWig' {
     """
 }
 
-//covgz_for_Rsummary
-//  .join(ch_bismark_align_log_for_Rsummary).collect().view()
 
 ///**********
 // * Process 4C: Generate summary statistics
