@@ -1,3 +1,6 @@
+# ChIP_nf
+Nextflow pipeline for ChIP-seq data analysis
+
 # Table of contents
 
 - [ChIP_nf](#chipnf)
@@ -17,8 +20,6 @@
     - [Diff peak analysis:](#diff-peak-analysis)
     - [motif scan:](#motif-scan)
 
-# ChIP_nf
-Nextflow pipeline for ChIP-seq data analysis
 
 # General
 Ref to ENCODE specification
@@ -32,11 +33,11 @@ trimmomatic?
 ### alignment: 
 bwa mem
 ### post processing: 
-picard MarkDuplicates, 
-picard CollectAlignmentSummaryMetrics,
-picard CollectInsertSizeMetrics (paired-end)
-samtools flagstat
-samtools idxstats
+picard MarkDuplicates  
+picard CollectAlignmentSummaryMetrics  
+picard CollectInsertSizeMetrics (paired-end)  
+samtools flagstat  
+samtools idxstats  
 samtools low quality removal, unmapped/unpaired/not proper paired removal
 
 ### post qc: 
@@ -46,13 +47,12 @@ fastqc
 
 ## Core analysis (in progress)
 ### peak calling: 
-macs2 
-Homer 
-HMMRATAC
+macs2  
+Homer  
 
 ## Advanced analysis (in progress)
 ### peak anno and comparison: 
-upsetplot, 
+upsetplot  
 ChIPseeker
 ### Diff peak analysis:
 DiffBind
