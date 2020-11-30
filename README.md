@@ -1,3 +1,22 @@
+# Table of contents
+
+- [ChIP_nf](#chipnf)
+- [General](#general)
+- [Details](#details)
+  - [Pre-analysis](#pre-analysis)
+    - [pre-QC:](#pre-qc)
+    - [trim (skipped):](#trim-skipped)
+    - [alignment:](#alignment)
+    - [post processing:](#post-processing)
+    - [post qc:](#post-qc)
+    - [generate summary metrics (in progress):](#generate-summary-metrics-in-progress)
+  - [Core analysis (in progress)](#core-analysis-in-progress)
+    - [peak calling:](#peak-calling)
+  - [Advanced analysis (in progress)](#advanced-analysis-in-progress)
+    - [peak anno and comparison:](#peak-anno-and-comparison)
+    - [Diff peak analysis:](#diff-peak-analysis)
+    - [motif scan:](#motif-scan)
+
 # ChIP_nf
 Nextflow pipeline for ChIP-seq data analysis
 
