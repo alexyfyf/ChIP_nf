@@ -199,7 +199,7 @@ process '1A_pre_fastqc' {
 /**********
  * PART 2: Alignment
  *
- * Process 2A: Create a genome index (.fai) 
+ * Process 2A: Create a genome index 
  */
 
 process '2A_index_genome' {
@@ -308,12 +308,13 @@ process '2B_filter_bam' {
  */
 process '3A_multiqc' {
     publishDir "${params.outdir}/MultiQC", mode: 'copy'
-
+    executor 'local'
+ 
     input:
     // only use fastqc from trimmed reads
-    file ('fastqc/*') from ch_fastqc_results_for_multiqc.collect().ifEmpty([])
+    file ('pre_fastqc/*') from ch_fastqc_results_for_multiqc.collect().ifEmpty([])
     file ('bamfiles/*') from ch_bamqc_for_multiqc.collect().ifEmpty([])
-    file ('bamfiles/_insert.txt') from ch_insert_multiqc.collect().ifEmpty([])
+    file ('bamfiles/*') from ch_insert_multiqc.collect().ifEmpty([])
 
     output:
     file "*multiqc_report.html"
