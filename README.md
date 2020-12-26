@@ -3,7 +3,6 @@ Nextflow pipeline for ChIP-seq data analysis
 
 # Table of contents
 
-- [ChIP_nf](#chipnf)
 - [General](#general)
 - [Details](#details)
   - [Pre-analysis](#pre-analysis)
@@ -22,7 +21,7 @@ Nextflow pipeline for ChIP-seq data analysis
 
 
 # General
-Ref to ENCODE specification
+Ref to [ENCODE specification](https://docs.google.com/document/d/1lG_Rd7fnYgRpSIqrIfuVlAz2dW1VaSQThzk836Db99c/edit#)
 
 # Details
 ## Pre-analysis
@@ -38,7 +37,8 @@ picard CollectAlignmentSummaryMetrics
 picard CollectInsertSizeMetrics (paired-end)  
 samtools flagstat  
 samtools idxstats  
-samtools low quality removal, unmapped/unpaired/not proper paired removal
+samtools low quality removal, unmapped/unpaired/not proper paired removal  
+calculate PBC1, PBC2, NRF
 
 ### post qc: 
 fastqc
