@@ -1,7 +1,0 @@
-Module	Section	Sample Name	Source
-Picard	AlignmentSummaryMetrics	test_R1_sorted	/fs03/ls25/feng.yan/Lmo2_ChIP/chip_nf/work/95/199448a0167ef291a937cd0390565c/flag_idx_dup_align/test_R1_alignmetrics.txt
-Picard	DuplicationMetrics	test_R1.filtered	/fs03/ls25/feng.yan/Lmo2_ChIP/chip_nf/work/95/199448a0167ef291a937cd0390565c/flag_idx_dup_align/test_R1_dups.txt
-Samtools	flagstat	test_R1	/fs03/ls25/feng.yan/Lmo2_ChIP/chip_nf/work/95/199448a0167ef291a937cd0390565c/flag_idx_dup_align/test_R1.flagstat
-Samtools	flagstat	test_R1.final	/fs03/ls25/feng.yan/Lmo2_ChIP/chip_nf/work/95/199448a0167ef291a937cd0390565c/flag_idx_dup_align/test_R1.final.flagstat
-Samtools	idxstats	test_R1	/fs03/ls25/feng.yan/Lmo2_ChIP/chip_nf/work/95/199448a0167ef291a937cd0390565c/flag_idx_dup_align/test_R1.idxstats
-FastQC	all_sections	test_R1	/fs03/ls25/feng.yan/Lmo2_ChIP/chip_nf/work/95/199448a0167ef291a937cd0390565c/pre_fastqc/test_R1_fastqc.zip
