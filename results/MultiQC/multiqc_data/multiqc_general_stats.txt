@@ -1,0 +1,5 @@
+Sample	Samtools Flagstat_mqc-generalstats-samtools_flagstat-mapped_passed	FastQC_mqc-generalstats-fastqc-percent_duplicates	FastQC_mqc-generalstats-fastqc-percent_gc	FastQC_mqc-generalstats-fastqc-avg_sequence_length	FastQC_mqc-generalstats-fastqc-percent_fails	FastQC_mqc-generalstats-fastqc-total_sequences	Picard_mqc-generalstats-picard-PERCENT_DUPLICATION	Picard_mqc-generalstats-picard-PCT_PF_READS_ALIGNED
+test_R1	49689	36.48311897106109	53.0	60.349155948553054	9.090909090909092	49760.0		
+test_R1.filtered							0.448422	
+test_R1.final	25976							
+test_R1_sorted								0.998573

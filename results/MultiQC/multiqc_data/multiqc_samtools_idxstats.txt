@@ -1,0 +1,2 @@
+Sample	chr19	*
+test_R1	49689	0

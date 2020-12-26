@@ -1,0 +1,5 @@
+multiqc, version 1.7
+/home/fyan0011/mx82/fyan0011/conda_env/rnasik-1.5.4/lib/python3.6/site-packages/multiqc/utils/config.py:45: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  configs = yaml.load(f)
+/home/fyan0011/mx82/fyan0011/conda_env/rnasik-1.5.4/lib/python3.6/site-packages/multiqc/utils/config.py:51: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  sp = yaml.load(f)
